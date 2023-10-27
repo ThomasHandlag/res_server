@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer {
+    .rail-nav-show  {
+
+    }
+
+    @keyframes rail-nav-animation {
+        
+    }
+}
