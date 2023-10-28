@@ -32,7 +32,7 @@ RUN composer install --optimize-autoloader --no-dev
 RUN chown -R www-data:www-data storage bootstrap/cache
 
 # Generate Laravel application key
-RUN php artisan key:generate
+# RUN php artisan key:generate
 
 # Install Node.js and npm
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
