@@ -1,7 +1,6 @@
 # Use the official PHP image as the base image
 FROM php:8.2-apache
 
-# Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -21,7 +20,7 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Set working directory
-WORKDIR /var/www/html/public
+WORKDIR /var/www/html
 
 # Copy project files to working directory
 COPY . .
@@ -33,13 +32,14 @@ RUN composer install --optimize-autoloader --no-dev
 RUN chown -R www-data:www-data storage bootstrap/cache
 
 # Generate Laravel application key
-# RUN php artisan key:generate
+RUN php artisan key:generate
 
 # Install Node.js and npm
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 RUN apt-get install -y nodejs
 
 # Install project dependencies using npm
+RUN npm install --global npm@latest
 RUN npm install
 
 # Build assets using Laravel Mix
